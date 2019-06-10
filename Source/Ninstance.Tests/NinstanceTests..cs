@@ -16,9 +16,9 @@ namespace Ninstance.Tests
             // act
             try
             {
-                Instance.Of<IDisposable>();
+                Instance.Of<ISomeRandomInterface>();
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 expectedException = e;
             }
@@ -27,6 +27,39 @@ namespace Ninstance.Tests
             Assert.IsNotNull(expectedException);
             Assert.IsInstanceOfType(expectedException, typeof(NotImplementedException));
             Assert.IsTrue(expectedException.Message.Contains("not supposed"));
+        }
+
+        [TestMethod]
+        public void WhenCreatingAnInstanceOfClassWithoutPublicConstructor_ThrowExplanatoryNotImplementedException()
+        {
+            // arrange
+            Exception expectedException = null;
+
+            // act
+            try
+            {
+                Instance.Of<ClassWithoutPublicConstructor>();
+            }
+            catch (Exception e)
+            {
+                expectedException = e;
+            }
+
+            // assert
+            Assert.IsNotNull(expectedException);
+            Assert.IsInstanceOfType(expectedException, typeof(NotImplementedException));
+            Assert.IsTrue(expectedException.Message.Contains("don't know how to construct"));
+        }
+    }
+
+    interface ISomeRandomInterface
+    {
+    }
+
+    class ClassWithoutPublicConstructor
+    {
+        private ClassWithoutPublicConstructor()
+        {
         }
     }
 }
