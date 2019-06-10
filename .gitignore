@@ -1,0 +1,7 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/Source/.vs/Ninstance
+/Source/Ninstance/bin/Debug/netstandard2.0
+/Source/Ninstance/obj
