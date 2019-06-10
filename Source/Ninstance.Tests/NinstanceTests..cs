@@ -50,16 +50,16 @@ namespace Ninstance.Tests
             Assert.IsInstanceOfType(expectedException, typeof(NotImplementedException));
             Assert.IsTrue(expectedException.Message.Contains("don't know how to construct"));
         }
-    }
 
-    interface ISomeRandomInterface
-    {
-    }
-
-    class ClassWithoutPublicConstructor
-    {
-        private ClassWithoutPublicConstructor()
+        interface ISomeRandomInterface
         {
+        }
+
+        class ClassWithoutPublicConstructor
+        {
+            private ClassWithoutPublicConstructor()
+            {
+            }
         }
     }
 }
