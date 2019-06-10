@@ -1,6 +1,10 @@
 ﻿namespace Ninstance
 {
+    using NSubstitute;
     using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Reflection;
 
     public static class Instance
     {
@@ -25,7 +29,29 @@
                 throw new NotImplementedException($"I currently don't know how to construct your {type.Name} because it has multiple constructors");
             }
 
-            throw new NotImplementedException();
+            var constructor = constructors.Single();
+            var arguments = CreateArgumentsFor(constructor, dependencies);
+
+            return (T)constructor.Invoke(arguments.ToArray());
+        }
+
+        private static IEnumerable<object> CreateArgumentsFor(ConstructorInfo constructor, object[] dependencies)
+        {
+            foreach (var constructorParameter in constructor.GetParameters())
+            {
+                yield return
+                    dependencies
+                        .Where(d => constructorParameter.ParameterType.IsAssignableFrom(d.GetType()))
+                        .FirstOrDefault()
+                    ??
+                    typeof(Substitute)
+                        .GetMethods()
+                        .Where(m => m.Name == "For")
+                        .Where(m => m.ReturnType.Name == "T")
+                        .Single()
+                        .MakeGenericMethod(constructorParameter.ParameterType)
+                        .Invoke(null, new object[1] { new object[0] });
+            }
         }
     }
 }

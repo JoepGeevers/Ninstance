@@ -86,14 +86,24 @@ namespace Ninstance.Tests
 
         class ClassWithMultiplePublicConstructors
         {
-            public ClassWithMultiplePublicConstructors()
-            {
-            }
+            public ClassWithMultiplePublicConstructors() { }
+            public ClassWithMultiplePublicConstructors(int i) { }
+        }
 
-            public ClassWithMultiplePublicConstructors(int i)
-            {
-            }
+        [TestMethod]
+        public void WhenCreatingAnInstanceOfClassWithParameterlessConstructor_ReturnsInstance()
+        {
+            // act
+            var result = Instance.Of<ClassWithSingleParameterlessConstructor>();
 
+            // assert
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(ClassWithSingleParameterlessConstructor));
+        }
+
+        class ClassWithSingleParameterlessConstructor
+        {
+            public ClassWithSingleParameterlessConstructor() { }
         }
     }
 }
