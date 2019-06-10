@@ -114,7 +114,10 @@ namespace Ninstance.Tests
             // assert
             Assert.IsNotNull(result);
 
+            Assert.IsNotNull(result.carService);
             Assert.AreEqual(42, result.carService.CheckSum);
+
+            Assert.IsNotNull(result.userService);
             Assert.IsInstanceOfType(result.userService, typeof(IUserService));
         }
 
