@@ -29,6 +29,10 @@ namespace Ninstance.Tests
             Assert.IsTrue(expectedException.Message.Contains("not supposed"));
         }
 
+        interface ISomeRandomInterface
+        {
+        }
+
         [TestMethod]
         public void WhenCreatingAnInstanceOfClassWithoutPublicConstructor_ThrowExplanatoryNotImplementedException()
         {
@@ -51,15 +55,45 @@ namespace Ninstance.Tests
             Assert.IsTrue(expectedException.Message.Contains("don't know how to construct"));
         }
 
-        interface ISomeRandomInterface
-        {
-        }
-
         class ClassWithoutPublicConstructor
         {
             private ClassWithoutPublicConstructor()
             {
             }
+        }
+
+        [TestMethod]
+        public void WhenCreatingAnInstanceOfClassWithMultiplePublicConstructors_ThrowExplanatoryNotImplementedException()
+        {
+            // arrange
+            Exception expectedException = null;
+
+            // act
+            try
+            {
+                Instance.Of<ClassWithMultiplePublicConstructors>();
+            }
+            catch (Exception e)
+            {
+                expectedException = e;
+            }
+
+            // assert
+            Assert.IsNotNull(expectedException);
+            Assert.IsInstanceOfType(expectedException, typeof(NotImplementedException));
+            Assert.IsTrue(expectedException.Message.Contains("don't know how to construct"));
+        }
+
+        class ClassWithMultiplePublicConstructors
+        {
+            public ClassWithMultiplePublicConstructors()
+            {
+            }
+
+            public ClassWithMultiplePublicConstructors(int i)
+            {
+            }
+
         }
     }
 }

@@ -20,6 +20,11 @@
                 throw new NotImplementedException($"I currently don't know how to construct your {type.Name} because it has no public constructors");
             }
 
+            if (constructors.Length > 1)
+            {
+                throw new NotImplementedException($"I currently don't know how to construct your {type.Name} because it has multiple constructors");
+            }
+
             throw new NotImplementedException();
         }
     }
