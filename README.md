@@ -5,12 +5,16 @@ Create constructor agnostic test instances on the fly, in the blink of an eye...
 Use
 
 ```c#
+// arrange
 var service = Instance.Of<FavouriteSongService>();
+
+// act
 ```
 
 instead of
 
 ```c#
+// arrange
 var service = new FavouriteSongService(
     new ThisService(),
     new ThatService(),
@@ -20,6 +24,8 @@ var service = new FavouriteSongService(
     new VeryImportantService(),
     new DontCareService()
 );
+
+// act
 ```
 
 and never look back. Ninstance will instantiate `FavouriteSongService` with substitutes. Stop fixing hundreds of tests when you change the signature of it.
@@ -27,17 +33,21 @@ and never look back. Ninstance will instantiate `FavouriteSongService` with subs
 Or, when you do want to pass dependencies, just do
 
 ```c#
+// arrange
 var actuallyUsefulService = Substitute.For<IActuallyUsefulService>();
     actuallyUsefulService.Jump().Returns(true);
 
 var veryImportantService = new VeryImportantService>(42);
 
 var service = Instance.Of<ICarService>(actuallyUsefulService, veryImportantService);
+
+// act
 ```
 
 instead of
 
 ```c#
+// arrange
 var actuallyUsefulService = Substitute.For<IActuallyUsefulService>();
     actuallyUsefulService.Jump().Returns(true);
 
@@ -52,6 +62,8 @@ var service = new CarService(
     veryImportantService,
     new DontCareService()
 );
+
+// act
 ```
 
 and move on.
