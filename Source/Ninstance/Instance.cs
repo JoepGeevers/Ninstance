@@ -11,6 +11,14 @@
     {
         public static T Of<T>(params object[] implementations) where T : class
         {
+            var constructor = GetUseableConstructorOf<T>();
+            var arguments = CreateArgumentsFor(constructor, implementations);
+
+            return (T)constructor.Invoke(arguments.ToArray());
+        }
+
+        private static ConstructorInfo GetUseableConstructorOf<T>() where T : class
+        {
             var type = typeof(T);
 
             if (type.IsInterface)
@@ -31,9 +39,7 @@
             }
 
             var constructor = constructors.Single();
-            var arguments = CreateArgumentsFor(constructor, implementations);
-
-            return (T)constructor.Invoke(arguments.ToArray());
+            return constructor;
         }
 
         private static IEnumerable<object> CreateArgumentsFor(ConstructorInfo constructor, object[] implementations)
@@ -48,6 +54,13 @@
             return FindDependencyFor(parameter, implementations) ?? CreateSubstituteFor(parameter);
         }
 
+        private static object FindDependencyFor(ParameterInfo parameter, object[] implementations)
+        {
+            return implementations
+                .Where(d => parameter.ParameterType.IsAssignableFrom(d.GetType()))
+                .FirstOrDefault();
+        }
+
         private static object CreateSubstituteFor(ParameterInfo parameter)
         {
             return typeof(Substitute)
@@ -57,13 +70,6 @@
                 .Single()
                 .MakeGenericMethod(parameter.ParameterType)
                 .Invoke(null, new object[1] { new object[0] });
-        }
-
-        private static object FindDependencyFor(ParameterInfo parameter, object[] implementations)
-        {
-            return implementations
-                .Where(d => parameter.ParameterType.IsAssignableFrom(d.GetType()))
-                .FirstOrDefault();
         }
     }
 }
