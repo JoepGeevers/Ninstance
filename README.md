@@ -2,16 +2,16 @@
 
 Create constructor agnostic test instances on the fly, in the blink of an eye...
 
+Use
+
 ```c#
-Instance.Of<FavouriteSongService>();
+var service = Instance.Of<FavouriteSongService>();
 ```
 
-Create constructor agnostic test instances test instances for testing without being bothered with constructor parameters
-
-Instead of
+instead of
 
 ```c#
-var testCarService = new CarService(
+var service = new FavouriteSongService(
     new ThisService(),
     new ThatService(),
     new ActuallyUsefulService(),
@@ -22,26 +22,28 @@ var testCarService = new CarService(
 );
 ```
 
-and fixing every single test when someone adds a new dependency
+and never look back. Ninstance will take care of instantiate FavouriteSongService with substitutes. Stop fixing hundreds of tests when you change the signature of a class.
 
-Just do
-
-```c#
-var testCarService = Instance.Of<CarService>();
-```
-
-and never look back. Ninstance will instantiate CarService with Substitute.For<>() for every argument.
-
-Or, when you want to pass dependencies, instead of
+Or, when you do want to pass dependencies, just do
 
 ```c#
 var actuallyUsefulService = Substitute.For<IActuallyUsefulService>();
 actuallyUsefulService.Jump().Returns(true);
 
-var veryImportantService = Substitute.For<IVeryImportantService>();
-veryImportantService.Guess().Returns(42);
+var veryImportantService = new VeryImportantService>(42);
 
-var testCarService = new CarService(
+var testCarSserviceervice = Instance.Of<ICarService>(actuallyUsefulService, veryImportantService);
+```
+
+instead of
+
+```c#
+var actuallyUsefulService = Substitute.For<IActuallyUsefulService>();
+actuallyUsefulService.Jump().Returns(true);
+
+var veryImportantService = new VeryImportantService>(42);
+
+var service = new CarService(
     new ThisService(),
     new ThatService(),
     actuallyUsefulService,
@@ -51,17 +53,5 @@ var testCarService = new CarService(
     new DontCareService()
 );
 ```
- 
- Just do 
- 
-```c#
-var actuallyUsefulService = Substitute.For<IActuallyUsefulService>();
-actuallyUsefulService.Jump().Returns(true);
 
-var veryImportantService = Substitute.For<IVeryImportantService>();
-veryImportantService.Guess().Returns(42);
-
-var testCarService = Instance.Of<ICarService>(actuallyUsefulService, veryImportantService);
-```
- 
- And move on.
+and move on.
