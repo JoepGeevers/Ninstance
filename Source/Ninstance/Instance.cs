@@ -38,21 +38,32 @@
 
         private static IEnumerable<object> CreateArgumentsFor(ConstructorInfo constructor, object[] dependencies)
         {
-            foreach (var constructorParameter in constructor.GetParameters())
-            {
-                yield return
-                    dependencies
-                        .Where(d => constructorParameter.ParameterType.IsAssignableFrom(d.GetType()))
-                        .FirstOrDefault()
-                    ??
-                    typeof(Substitute)
-                        .GetMethods()
-                        .Where(m => m.Name == "For")
-                        .Where(m => m.ReturnType.Name == "T")
-                        .Single()
-                        .MakeGenericMethod(constructorParameter.ParameterType)
-                        .Invoke(null, new object[1] { new object[0] });
-            }
+            return constructor
+                .GetParameters()
+                .Select(p => CreateArgumentFor(p, dependencies));
+        }
+
+        private static object CreateArgumentFor(ParameterInfo parameter, object[] dependencies)
+        {
+            return FindDependencyFor(parameter, dependencies) ?? CreateSubstituteFor(parameter);
+        }
+
+        private static object CreateSubstituteFor(ParameterInfo parameter)
+        {
+            return typeof(Substitute)
+                .GetMethods()
+                .Where(m => m.Name == "For")
+                .Where(m => m.ReturnType.Name == "T")
+                .Single()
+                .MakeGenericMethod(parameter.ParameterType)
+                .Invoke(null, new object[1] { new object[0] });
+        }
+
+        private static object FindDependencyFor(ParameterInfo parameter, object[] dependencies)
+        {
+            return dependencies
+                .Where(d => parameter.ParameterType.IsAssignableFrom(d.GetType()))
+                .FirstOrDefault();
         }
     }
 }
