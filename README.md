@@ -3,7 +3,7 @@
 Create constructor agnostic test instances on the fly, in the blink of an eye...
 
 ```c#
-Instance.Of<FavouriteSongService>()
+Instance.Of<FavouriteSongService>();
 ```
 
 Create constructor agnostic test instances test instances for testing without being bothered with constructor parameters
@@ -19,7 +19,7 @@ var testCarService = new CarService(
   new ForgottenService(),
   new VeryImportantService(),
   new DontCareService()
-)
+);
 ```
 
 and fixing every single test when someone adds a new dependency
@@ -49,7 +49,7 @@ veryImportantService.Guess().Returns(42);
   new ForgottenService(),
   veryImportantService,
   new DontCareService()
-)
+);
 
  ```
  
