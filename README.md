@@ -39,7 +39,7 @@ var actuallyUsefulService = Substitute.For<IActuallyUsefulService>();
 
 var veryImportantService = new VeryImportantService>(42);
 
-var service = Instance.Of<ICarService>(actuallyUsefulService, veryImportantService);
+var service = Instance.Of<CarService>(actuallyUsefulService, veryImportantService);
 
 // act
 ```
