@@ -4,7 +4,7 @@
     <TargetFrameworks>netstandard2.0;net45</TargetFrameworks>
     <Authors>Joep Geevers</Authors>
     <Company>Joep Geevers</Company>
-    <PackageTags>testing tool create instance</PackageTags>
+    <PackageTags>test class instance factory unit-testing tdd</PackageTags>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/Heras/Ninstance</PackageProjectUrl>
