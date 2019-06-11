@@ -8,7 +8,13 @@
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/Heras/Ninstance</PackageProjectUrl>
-    <Version>1.0.1</Version>
+    <Version>1.0.2</Version>
+    <Description>Ninstance creates test instances for your classes without you having to care about the constructor signature, so you can change dependencies without having to fix hundreds of tests, or passing substitutes that don't affect behaviour</Description>
+    <RepositoryUrl>https://github.com/Heras/Ninstance</RepositoryUrl>
+    <PackageReleaseNotes>Changed the description of the nuget package</PackageReleaseNotes>
+    <FileVersion>1.0.3.0</FileVersion>
+    <AssemblyVersion>1.0.3.0</AssemblyVersion>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>
