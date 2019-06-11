@@ -9,7 +9,7 @@
 
     public static class Instance
     {
-        public static T Of<T>(params object[] dependencies) where T : class
+        public static T Of<T>(params object[] implementations) where T : class
         {
             var type = typeof(T);
 
@@ -31,21 +31,21 @@
             }
 
             var constructor = constructors.Single();
-            var arguments = CreateArgumentsFor(constructor, dependencies);
+            var arguments = CreateArgumentsFor(constructor, implementations);
 
             return (T)constructor.Invoke(arguments.ToArray());
         }
 
-        private static IEnumerable<object> CreateArgumentsFor(ConstructorInfo constructor, object[] dependencies)
+        private static IEnumerable<object> CreateArgumentsFor(ConstructorInfo constructor, object[] implementations)
         {
             return constructor
                 .GetParameters()
-                .Select(p => CreateArgumentFor(p, dependencies));
+                .Select(p => CreateArgumentFor(p, implementations));
         }
 
-        private static object CreateArgumentFor(ParameterInfo parameter, object[] dependencies)
+        private static object CreateArgumentFor(ParameterInfo parameter, object[] implementations)
         {
-            return FindDependencyFor(parameter, dependencies) ?? CreateSubstituteFor(parameter);
+            return FindDependencyFor(parameter, implementations) ?? CreateSubstituteFor(parameter);
         }
 
         private static object CreateSubstituteFor(ParameterInfo parameter)
@@ -59,9 +59,9 @@
                 .Invoke(null, new object[1] { new object[0] });
         }
 
-        private static object FindDependencyFor(ParameterInfo parameter, object[] dependencies)
+        private static object FindDependencyFor(ParameterInfo parameter, object[] implementations)
         {
-            return dependencies
+            return implementations
                 .Where(d => parameter.ParameterType.IsAssignableFrom(d.GetType()))
                 .FirstOrDefault();
         }
