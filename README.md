@@ -12,13 +12,13 @@ Instead of
 
 ```c#
 var testCarService = new CarService(
-  new ThisService(),
-  new ThatService(),
-  new ActuallyUsefulService(),
-  new AddedService(),
-  new ForgottenService(),
-  new VeryImportantService(),
-  new DontCareService()
+    new ThisService(),
+    new ThatService(),
+    new ActuallyUsefulService(),
+    new AddedService(),
+    new ForgottenService(),
+    new VeryImportantService(),
+    new DontCareService()
 );
 ```
 
@@ -41,17 +41,16 @@ actuallyUsefulService.Jump().Returns(true);
 var veryImportantService = Substitute.For<IVeryImportantService>();
 veryImportantService.Guess().Returns(42);
 
- var testCarService = new CarService(
-  new ThisService(),
-  new ThatService(),
-  actuallyUsefulService,
-  new AddedService(),
-  new ForgottenService(),
-  veryImportantService,
-  new DontCareService()
+var testCarService = new CarService(
+    new ThisService(),
+    new ThatService(),
+    actuallyUsefulService,
+    new AddedService(),
+    new ForgottenService(),
+    veryImportantService,
+    new DontCareService()
 );
-
- ```
+```
  
  Just do 
  
@@ -62,8 +61,7 @@ actuallyUsefulService.Jump().Returns(true);
 var veryImportantService = Substitute.For<IVeryImportantService>();
 veryImportantService.Guess().Returns(42);
 
- var testCarService = Instance.Of<ICarService>(actuallyUsefulService, veryImportantService);
-
- ```
+var testCarService = Instance.Of<ICarService>(actuallyUsefulService, veryImportantService);
+```
  
  And move on.
