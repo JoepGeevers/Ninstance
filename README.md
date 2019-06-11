@@ -2,13 +2,15 @@
 
 Create constructor agnostic test instances on the fly, in the blink of an eye...
 
-`Instance.Of<FavouriteSongService>()`
+```c#
+Instance.Of<FavouriteSongService>()
+```
 
 Create constructor agnostic test instances test instances for testing without being bothered with constructor parameters
 
 Instead of
 
-```
+```c#
 var testCarService = new CarService(
   new ThisService(),
   new ThatService(),
@@ -24,7 +26,7 @@ and fixing every single test when someone adds a new dependency
 
 Just do
 
-```
+```c#
 var testCarService = Instance.Of<CarService>();
 ```
 
@@ -32,7 +34,7 @@ and never look back. Ninstance will instantiate CarService with Substitute.For<>
 
 Or, when you want to pass dependencies, instead of
 
-```
+```c#
 var actuallyUsefulService = Substitute.For<IActuallyUsefulService>();
 actuallyUsefulService.Jump().Returns(true);
 
@@ -53,7 +55,7 @@ veryImportantService.Guess().Returns(42);
  
  Just do 
  
-```
+```c#
 var actuallyUsefulService = Substitute.For<IActuallyUsefulService>();
 actuallyUsefulService.Jump().Returns(true);
 
