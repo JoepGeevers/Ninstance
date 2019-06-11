@@ -14,7 +14,7 @@
             var constructor = GetUseableConstructorOf<T>();
             var arguments = CreateArgumentsFor(constructor, implementations);
 
-            return (T)constructor.Invoke(arguments.ToArray());
+            return (T)constructor.Invoke(arguments);
         }
 
         private static ConstructorInfo GetUseableConstructorOf<T>() where T : class
@@ -42,11 +42,12 @@
             return constructor;
         }
 
-        private static IEnumerable<object> CreateArgumentsFor(ConstructorInfo constructor, object[] implementations)
+        private static object[] CreateArgumentsFor(ConstructorInfo constructor, object[] implementations)
         {
             return constructor
                 .GetParameters()
-                .Select(p => CreateArgumentFor(p, implementations));
+                .Select(p => CreateArgumentFor(p, implementations))
+                .ToArray();
         }
 
         private static object CreateArgumentFor(ParameterInfo parameter, object[] implementations)
