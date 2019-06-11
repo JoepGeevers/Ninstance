@@ -51,7 +51,7 @@ instead of
 var actuallyUsefulService = Substitute.For<IActuallyUsefulService>();
     actuallyUsefulService.Jump().Returns(true);
 
-var veryImportantService = new VeryImportantService>(42);
+var veryImportantService = new VeryImportantService(42);
 
 var service = new FavouriteSongService(
     new ThisService(),
