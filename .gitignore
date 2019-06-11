@@ -7,3 +7,7 @@
 /Source/Ninstance/obj
 /Source/Ninstance.Tests/obj
 /Source/Ninstance.Tests/bin/Debug/netcoreapp2.1
+/Source/Ninstance.Tests/bin/Release/netcoreapp2.1
+/Source/Ninstance/Ninstance.csproj.user
+/Source/Ninstance/bin/Release/netstandard2.0
+/Source/Ninstance/bin/Release/net45
