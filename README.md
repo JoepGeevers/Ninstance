@@ -1,5 +1,10 @@
 # Ninstance
-Quickly create an instances of your class for testing without being bothered with constructor parameters
+
+Create constructor agnostic test instances on the fly, in the blink of an eye...
+
+`Instance.Of<FavouriteSongService>()`
+
+Create constructor agnostic test instances test instances for testing without being bothered with constructor parameters
 
 Instead of
 
