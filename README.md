@@ -22,24 +22,24 @@ var service = new FavouriteSongService(
 );
 ```
 
-and never look back. Ninstance will take care of instantiate FavouriteSongService with substitutes. Stop fixing hundreds of tests when you change the signature of a class.
+and never look back. Ninstance will take care of instantiate `FavouriteSongService` with substitutes. Stop fixing hundreds of tests when you change the signature of a class.
 
 Or, when you do want to pass dependencies, just do
 
 ```c#
 var actuallyUsefulService = Substitute.For<IActuallyUsefulService>();
-actuallyUsefulService.Jump().Returns(true);
+    actuallyUsefulService.Jump().Returns(true);
 
 var veryImportantService = new VeryImportantService>(42);
 
-var testCarSserviceervice = Instance.Of<ICarService>(actuallyUsefulService, veryImportantService);
+var service = Instance.Of<ICarService>(actuallyUsefulService, veryImportantService);
 ```
 
 instead of
 
 ```c#
 var actuallyUsefulService = Substitute.For<IActuallyUsefulService>();
-actuallyUsefulService.Jump().Returns(true);
+    actuallyUsefulService.Jump().Returns(true);
 
 var veryImportantService = new VeryImportantService>(42);
 
