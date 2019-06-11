@@ -22,7 +22,7 @@ var service = new FavouriteSongService(
 );
 ```
 
-and never look back. Ninstance will take care of instantiate `FavouriteSongService` with substitutes. Stop fixing hundreds of tests when you change the signature of a class.
+and never look back. Ninstance will instantiate `FavouriteSongService` with substitutes. Stop fixing hundreds of tests when you change the signature of it.
 
 Or, when you do want to pass dependencies, just do
 
