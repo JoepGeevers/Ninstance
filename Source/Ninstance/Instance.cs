@@ -37,8 +37,7 @@
                 throw new NotImplementedException($"I currently don't know how to construct your {type.Name} because it has multiple constructors");
             }
 
-            var constructor = constructors.Single();
-            return constructor;
+            return constructors.Single();
         }
 
         private static object[] CreateArgumentsFor(ConstructorInfo constructor, object[] implementations)
