@@ -42,34 +42,27 @@
         }
 
         private static object[] CreateArgumentsFor(ConstructorInfo constructor, object[] implementations)
-        {
-            return constructor
-                .GetParameters()
-                .Select(p => CreateArgumentFor(p, implementations))
-                .ToArray();
-        }
+            => constructor
+                  .GetParameters()
+                  .Select(p => CreateArgumentFor(p, implementations))
+                  .ToArray();
 
         private static object CreateArgumentFor(ParameterInfo parameter, object[] implementations)
-        {
-            return FindDependencyFor(parameter, implementations) ?? CreateSubstituteFor(parameter);
-        }
+            => FindDependencyFor(parameter, implementations)
+                ?? CreateSubstituteFor(parameter);
 
         private static object FindDependencyFor(ParameterInfo parameter, object[] implementations)
-        {
-            return implementations
+            => implementations
                 .Where(d => parameter.ParameterType.IsAssignableFrom(d.GetType()))
                 .FirstOrDefault();
-        }
 
         private static object CreateSubstituteFor(ParameterInfo parameter)
-        {
-            return typeof(Substitute)
+            => typeof(Substitute)
                 .GetMethods()
                 .Where(m => m.Name == "For")
                 .Where(m => m.ReturnType.Name == "T")
                 .Single()
                 .MakeGenericMethod(parameter.ParameterType)
                 .Invoke(null, new object[1] { new object[0] });
-        }
     }
 }
