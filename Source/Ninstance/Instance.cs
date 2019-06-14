@@ -53,8 +53,7 @@
 
         private static object FindDependencyFor(ParameterInfo parameter, object[] implementations)
             => implementations
-                .Select(i => i.GetType())
-                .Where(parameter.ParameterType.IsAssignableFrom)
+                .Where(d => parameter.ParameterType.IsAssignableFrom(d.GetType()))      
                 .FirstOrDefault();
 
         private static object CreateSubstituteFor(ParameterInfo parameter)
