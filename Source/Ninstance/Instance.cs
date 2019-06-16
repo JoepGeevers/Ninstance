@@ -13,7 +13,9 @@
             var constructor = GetUseableConstructorOf<T>();
             var arguments = CreateArgumentsFor(constructor, implementations);
 
-            return (T)constructor.Invoke(arguments);
+            var instance = constructor.Invoke(arguments);
+
+            return (T)instance;
         }
 
         private static ConstructorInfo GetUseableConstructorOf<T>() where T : class
@@ -22,7 +24,7 @@
 
             if (type.IsInterface)
             {
-                throw new NotImplementedException("I'm not supposed to create instances for interfaces. Please use NSubstitute directly");
+                throw new ArgumentException("I'm not supposed to create instances for interfaces. Please use NSubstitute directly");
             }
 
             var constructors = type.GetConstructors();

@@ -8,7 +8,7 @@ namespace Ninstance.Tests
     public class NinstanceTests
     {
         [TestMethod]
-        public void WhenCreatingAnInstanceOfAnInterface_ThrowExplanatoryNotImplementedException()
+        public void WhenCreatingAnInstanceOfAnInterface_ThrowExplanatoryArgumentException()
         {
             // arrange
             Exception expectedException = null;
@@ -25,7 +25,7 @@ namespace Ninstance.Tests
 
             // assert
             Assert.IsNotNull(expectedException);
-            Assert.IsInstanceOfType(expectedException, typeof(NotImplementedException));
+            Assert.IsInstanceOfType(expectedException, typeof(ArgumentException));
             Assert.IsTrue(expectedException.Message.Contains("not supposed"));
         }
 
