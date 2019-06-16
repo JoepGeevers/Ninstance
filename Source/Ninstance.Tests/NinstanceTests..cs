@@ -8,7 +8,7 @@ namespace Ninstance.Tests
     public class NinstanceTests
     {
         [TestMethod]
-        public void WhenCreatingAnInstanceOfAnInterface_ThrowExplanatoryArgumentException()
+        public void WhenCreatingAnInstanceOfAnInterface_ThrowsArgumentException()
         {
             // arrange
             Exception expectedException = null;
@@ -30,7 +30,7 @@ namespace Ninstance.Tests
         }
 
         [TestMethod]
-        public void WhenCreatingAnInstanceOfClassWithoutPublicConstructor_ThrowExplanatoryNotImplementedException()
+        public void WhenCreatingAnInstanceOfClassWithoutPublicConstructor_ThrowsMissingMethodException()
         {
             // arrange
             Exception expectedException = null;
@@ -47,8 +47,8 @@ namespace Ninstance.Tests
 
             // assert
             Assert.IsNotNull(expectedException);
-            Assert.IsInstanceOfType(expectedException, typeof(NotImplementedException));
-            Assert.IsTrue(expectedException.Message.Contains("don't know how to construct"));
+            Assert.IsInstanceOfType(expectedException, typeof(MissingMethodException));
+            Assert.IsTrue(expectedException.Message.Contains("it doesn't have any public constructors"));
         }
 
         class ClassWithoutPublicConstructor
