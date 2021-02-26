@@ -14,7 +14,7 @@
     <PackageReleaseNotes>Changed the description of the nuget package</PackageReleaseNotes>
     <FileVersion>1.0.3.0</FileVersion>
     <AssemblyVersion>1.0.3.0</AssemblyVersion>
-    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageIcon>response-nuget-icon.png</PackageIcon>
   </PropertyGroup>
 
