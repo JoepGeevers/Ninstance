@@ -15,7 +15,7 @@
     <FileVersion>1.0.3.0</FileVersion>
     <AssemblyVersion>1.0.3.0</AssemblyVersion>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageIcon>response-nuget-icon.png</PackageIcon>
+    <PackageIcon>ninstance-nuget-icon.png</PackageIcon>
   </PropertyGroup>
 
   <ItemGroup>
@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="..\..\..\..\Geevers.Infrastructure\Geevers.Infrastructure\response-nuget-icon.png">
+    <None Include="ninstance-nuget-icon.png">
       <Pack>True</Pack>
       <PackagePath></PackagePath>
     </None>
