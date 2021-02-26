@@ -3,15 +3,9 @@
 ################################################################################
 
 /Source/.vs/Ninstance
-/Source/Ninstance/bin/Debug/netstandard2.0
 /Source/Ninstance/obj
+/Source/Ninstance/bin
 /Source/Ninstance.Tests/obj
-/Source/Ninstance.Tests/bin/Debug/netcoreapp2.1
-/Source/Ninstance.Tests/bin/Release/netcoreapp2.1
+/Source/Ninstance.Tests/bin
 /Source/Ninstance/Ninstance.csproj.user
-/Source/Ninstance/bin/Release/netstandard2.0
-/Source/Ninstance/bin/Release/net45
-/Source/Ninstance/bin/Debug/net45
-/.vs/Ninstance/v16/.suo
-/.vs/VSWorkspaceState.json
-/.vs/slnx.sqlite
+/.vs
