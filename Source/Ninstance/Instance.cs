@@ -24,7 +24,7 @@
 
             if (type.IsInterface)
             {
-                throw new ArgumentException("I'm not supposed to create instances for interfaces. Please use NSubstitute directly");
+                throw new ArgumentException("I'm not supposed to create instances for interfaces. Please use something like NSubstitute instead");
             }
 
             var constructors = type.GetConstructors();
