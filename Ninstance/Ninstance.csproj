@@ -11,7 +11,7 @@
     <Version>1.1.0</Version>
     <Description>Ninstance creates test instances for your classes without you having to care about the constructor signature, so you can change dependencies without having to fix hundreds of tests, or passing substitutes that don't affect behaviour</Description>
     <RepositoryUrl>https://github.com/Heras/Ninstance</RepositoryUrl>
-    <PackageReleaseNotes>Changed the description of the nuget package</PackageReleaseNotes>
+    <PackageReleaseNotes>Added overload to specify constructor to use</PackageReleaseNotes>
     <FileVersion>1.1.0.0</FileVersion>
     <AssemblyVersion>1.1.0.0</AssemblyVersion>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
