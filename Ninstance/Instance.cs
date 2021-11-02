@@ -11,6 +11,12 @@
         public static T Of<T>(params object[] implementations) where T : class
         {
             var constructor = GetUseableConstructorOf<T>();
+
+            return Of<T>(constructor, implementations);
+        }
+
+        public static T Of<T>(ConstructorInfo constructor, params object[] implementations) where T : class
+        {
             var arguments = CreateArgumentsFor(constructor, implementations);
 
             var instance = constructor.Invoke(arguments);
@@ -36,7 +42,7 @@
 
             if (constructors.Length > 1)
             {
-                throw new NotImplementedException($"I currently don't know how to construct your {type.Name} because it has multiple constructors");
+                throw new NotImplementedException($"I currently don't know how to construct your {type.Name} because it has multiple constructors. Please provide the constructor yourself");
             }
 
             return constructors.Single();

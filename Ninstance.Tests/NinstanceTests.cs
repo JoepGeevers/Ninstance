@@ -1,6 +1,7 @@
 namespace Ninstance.Tests
 {
     using System;
+    using System.Linq;
 
     using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -78,6 +79,20 @@ namespace Ninstance.Tests
             Assert.IsNotNull(expectedException);
             Assert.IsInstanceOfType(expectedException, typeof(NotImplementedException));
             Assert.IsTrue(expectedException.Message.Contains("don't know how to construct"));
+        }
+
+        [TestMethod]
+        public void WhenCreatingAnInstanceOfClassWithMultiplePublicConstructors_AndConstructorIsProvided_ReturnsInstance()
+        {
+            // arrange
+            var constructor = typeof(ClassWithMultiplePublicConstructors).GetConstructors().First();
+
+            // act
+            var result = Instance.Of<ClassWithMultiplePublicConstructors>(constructor);
+
+            // assert
+            Assert.IsNotNull(result);
+            Assert.IsInstanceOfType(result, typeof(ClassWithMultiplePublicConstructors));
         }
 
         class ClassWithMultiplePublicConstructors
